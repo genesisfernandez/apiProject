@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Food Recipe Searcher</title>
+</head>
+<body>
+
+        <div id="main-contaner">          
+          <div class="search-container">
+
+                <!-- div for search bar -->
+
+            <div class="tagline-bar">
+              <h1 class="tag-line">Find Meals for Your Ingredients</h1>
+            </div>
+            <div class="motto-bar">
+              <p class="motto-item"> <em>Good food, good mood❤️ -</em><cite> Genesis</cite></p>
+            </div>
+            <form action="" method="post" class="search-bar">
+              <input class="input-search" type="search" name="foodName" placeholder="Enter your Main Ingredients" required autocomplete="off"/>
+              <button class="btn-submit" type="submit"><img src="../images/Untitled.png" alt=""></button>
+            </form>  
+          </div> 
+
+                <!-- Output -->
+
+          <div class="meal-result">
+            <h2>Your Search Results:</h2>
+            <div id="meal">
+              <% if (locals.contentMealItem) {%>
+              <% contentMealItem.forEach((element) => {%>
+                <div class="meal-item">
+                  <div class = "meal-img">
+                    <img src="<%= element.strMealThumb %>" alt="Food Image">
+                  </div>
+                  <div class = "meal-name">
+                    <h3><cite><%= element.strMeal %></cite></h3>
+                    <form action="/result" method="post">
+                      <button type="submit" class="recipe-btn" name="num" value="<%= element.idMeal %>">Get Recipe</button>
+                    </form>
+                  </div>
+                </div>
+                  <% }); %>
+              <%} %>
+            </div>
+          </div>
+
+
+
+        </div>
+                  
+      
+</body> 
+</html>

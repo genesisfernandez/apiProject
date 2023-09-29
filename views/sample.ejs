@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Food Recipe Searcher</title>
+</head>
+<body>
+    
+    <% if (locals.contentMealInfo) {%>
+    <% contentMealInfo.forEach((info) => {%>
+      <div id="mealInfo-main">
+        <h2><cite><%= info.strMeal %></cite></h2>
+        <div class="mealInfo-container">
+          <div class="item-info first-item">
+            <div class="meal-ingredients">
+                <h2><cite>Instruction:</cite></h2>
+                <% const strInstruction = Object.values(info); %>
+                <p><%= strInstruction[5]; %></p>
+            </div>
+            <div class="meal-instruction">
+                <h2><cite>Ingredients:</cite></h2>
+                <ul>
+                  <% const idMealKeys = Object.values(info); %>
+                  <% const newIDMealKeys = idMealKeys.splice(9, 20); %>
+                  <% const ValueMealKeys = Object.values(info); %>
+                  <% const newValueMealKeys = ValueMealKeys.splice(29, 44); %>
+                  <% for ( i = 0; i < newIDMealKeys.length; i++) {%>
+                    <% if (newIDMealKeys[i] == "") { %>
+                      <% newIDMealKeys.pop(newIDMealKeys[i]); %>
+                    <% } else if (newValueMealKeys[i] == "") { %>
+                      <% newValueMealKeys.pop(newValueMealKeys[i]); %>
+                    <% } else { %>
+                      <li><%= newValueMealKeys[i] %> of <%= newIDMealKeys[i] %> </li>
+                    <% } %>
+                  <%} %>
+                </ul>
+            </div>  
+          </div>
+          <div class="item-info second-item"> 
+            <h1>Video Tutorial</h1>
+            <iframe 
+              <% const ytItem = Object.values(info); %>
+              <% const initialYTItem = ytItem[8].split(""); %>
+              <% const newYTItem = initialYTItem.splice(32, 42); %>
+              <% const toBePlacedYTItem = newYTItem.join(); %>
+              <% const sourse = `https://www.youtube.com/embed/${toBePlacedYTItem}` %>
+
+              src="<%= sourse %>", 
+              height="200" width="300" title="Iframe Example">
+          </iframe>
+          </div>
+        </div>
+      </div>
+    <%}); %>
+    <%} else {%>
+    <%} %>
+
+</body>
+</html>
